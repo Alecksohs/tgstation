@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-import { colord, HsvaColor, HsvColor } from 'colord';
+import { colord, HsvColor } from 'colord';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -42,10 +42,9 @@ export const ColorPickerModal = (_) => {
     autofocus,
     default_color = '#000000',
   } = data;
-  let [selectedColor, setSelectedColor] = useState<HsvaColor>(
-    // hexToHsva(default_color),
-    colord(default_color).toHsv(),
-  );
+  const initialColor = colord(default_color).toHsv();
+
+  const [selectedColor, setSelectedColor] = useState(initialColor);
 
   return (
     <Window height={400} title={title} width={600} theme="generic">
@@ -140,11 +139,11 @@ export const ColorSelector = ({
                 <Box textColor="label">Hex:</Box>
               </Stack.Item>
               <Stack.Item grow height="24px">
-                <ColorSelector
+                {/* <ColorSelector
                   color={colord(color).toHsv()}
                   defaultColor={colord('#00000').toHslString()}
                   setColor={undefined}
-                />
+                /> */}
               </Stack.Item>
             </Stack>
           </Stack.Item>
@@ -155,7 +154,7 @@ export const ColorSelector = ({
                 <Box textColor="label">H:</Box>
               </Stack.Item>
               <Stack.Item grow>
-                <Slider name="saturatio" onChange={handleChange} hue={color.h}>
+                <Slider name="Hugh" onChange={handleChange} hue={color.h}>
                   hi
                 </Slider>
                 {/* <Hue hue={color.h} onChange={handleChange} /> */}
